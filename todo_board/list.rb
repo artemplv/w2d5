@@ -24,6 +24,7 @@ class List
   end
 
   def valid_index?(index)
+    index = index.to_i
     if @items[index] && index >= 0
       return true
     end
@@ -31,6 +32,9 @@ class List
   end
 
   def swap(index_1, index_2)
+    index_1 = index_1.to_i
+    index_2 = index_2.to_i
+    
     if !valid_index?(index_1) || !valid_index?(index_2)
       return false
     end
@@ -40,6 +44,8 @@ class List
   end
 
   def [](index)
+    index = index.to_i
+  
     @items[index]
   end
 
@@ -67,6 +73,8 @@ class List
   end
 
   def print_full_item(index)
+    index = index.to_i
+  
     if !valid_index?(index)
       return
     end
@@ -84,6 +92,9 @@ class List
   end
 
   def up(index, amount = 1)
+    index = index.to_i
+    amount = amount.to_i
+  
     if !valid_index?(index)
       return false
     end
@@ -104,6 +115,9 @@ class List
   end
 
   def down(index, amount = 1)
+    index = index.to_i
+    amount = amount.to_i
+
     if !valid_index?(index)
       return false
     end
