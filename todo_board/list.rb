@@ -140,13 +140,3 @@ def make_print_row(col_1, col_2, col_3)
 
   col_1_str + Vertical_border + col_2_str + Vertical_border + col_3_str
 end
-
-# my_list = List.new('Groceries')
-# my_list.add_item('candy', '2019-10-31', '4 bags should be enough')
-# my_list.add_item('cheese', '2019-10-25', 'Get American and Feta for good measure.')
-# my_list.add_item('toothpaste', '2019-10-25')
-# my_list.add_item('shampoo', '2019-11-24')
-# my_list.print
-
-# p my_list.sort_by_date!
-# my_list.print
