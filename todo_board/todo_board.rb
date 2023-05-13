@@ -1,32 +1,46 @@
 require_relative 'list'
 
 class TodoBoard
-  def initialize(label)
-    @list = List.new(label)
+  def initialize
+    @lists = Hash.new
   end
 
   def get_command
-    print 'Enter a command and arguments: '
+    print 'Enter a command: '
     cmd, *args = gets.chomp.split(' ')
 
+    label = args.shift
+
     case cmd
+      when 'mklist'
+        @lists[label] = List.new(label)
+      when 'ls'
+        @lists.keys.each { |key| puts key }
+      when 'showall'
+        @lists.values.each { |list| list.print }
       when 'mktodo'
-        @list.add_item(*args)
+        @lists[label].add_item(*args)
       when 'up'
-        @list.up(*args)
+        @lists[label].up(*args)
       when 'down'
-        @list.down(*args)
+        @lists[label].down(*args)
       when 'swap'
-        @list.swap(*args)
+        @lists[label].swap(*args)
       when 'sort'
-        @list.sort_by_date!
+        @lists[label].sort_by_date!
       when 'priority'
-        @list.print_priority
+        @lists[label].print_priority
+      when 'toggle'
+        @lists[label].toggle_item(*args)
+      when 'rm'
+        @lists[label].remove_item(*args)
+      when 'purge'
+        @lists[label].purge
       when 'print'
         if args.empty?
-          @list.print
+          @lists[label].print
         else
-          @list.print_full_item(*args)
+          @lists[label].print_full_item(*args)
         end
       when 'quit'
         return false
@@ -46,3 +60,6 @@ class TodoBoard
     end
   end
 end
+
+# my_board = TodoBoard.new
+# my_board.run

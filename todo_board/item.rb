@@ -1,6 +1,6 @@
 class Item
   attr_accessor :title, :description
-  attr_reader :deadline
+  attr_reader :deadline, :done
 
   def initialize(title, deadline, description)
     unless Item.valid_date?(deadline)
@@ -10,8 +10,8 @@ class Item
     @title = title
     @deadline = deadline
     @description = description
+    @done = false
   end
-
 
   def self.valid_date?(date)
     date_arr = date.split('-')
@@ -24,6 +24,10 @@ class Item
     end
 
     @deadline = date
+  end
+
+  def toggle
+    @done = !@done
   end
 end
 

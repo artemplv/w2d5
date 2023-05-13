@@ -60,12 +60,12 @@ class List
     puts Horizontal_border
     
     # column titles
-    puts make_print_row('Index', 'Item', 'Deadline')
+    puts make_print_row('Index', 'Item', 'Deadline', 'Done')
     puts Horizontal_border
 
     # content rows
     @items.each_with_index do |item, i|
-      puts make_print_row(i.to_s, item.title, item.deadline)
+      puts make_print_row(i.to_s, item.title, item.deadline, item.done.to_s)
     end
 
     # closing border
@@ -84,6 +84,11 @@ class List
     puts item.title
     puts item.description
     puts item.deadline
+    if item.done
+      puts 'Done'
+    else
+      puts 'Not done'
+    end
     puts Horizontal_border
   end
 
@@ -140,6 +145,29 @@ class List
   def sort_by_date!
     @items.sort_by! { |item| item.deadline }
   end
+
+  def toggle_item(index)
+    index = index.to_i
+    if !valid_index?(index)
+      return false
+    end
+
+    @items[index].toggle()
+  end
+
+  def remove_item(index)
+    index = index.to_i
+    if !valid_index?(index)
+      return false
+    end
+
+    @items.delete_at(index)
+    true
+  end
+
+  def purge
+    @items.delete_if { |item| item.done }
+  end
 end
 
 
@@ -147,10 +175,11 @@ end
 Horizontal_border = "".ljust(100, '-')
 Vertical_border = "|".center(5)
 
-def make_print_row(col_1, col_2, col_3)
+def make_print_row(col_1, col_2, col_3, col_4)
   col_1_str = col_1.ljust(8)
-  col_2_str = col_2.ljust(56)
+  col_2_str = col_2.ljust(42)
   col_3_str = col_3.ljust(26)
+  col_4_str = col_4.ljust(9)
 
-  col_1_str + Vertical_border + col_2_str + Vertical_border + col_3_str
+  col_1_str + Vertical_border + col_2_str + Vertical_border + col_3_str + Vertical_border + col_4_str
 end
